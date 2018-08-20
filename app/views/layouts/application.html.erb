@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Twitter</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+
+
+
+<!-- REBUILD NAV BAR -->
+<div id="nav" class="sticky-top">
+    <div id="nav_container" class="container">
+        <div class="navbar navbar-expand-lg">
+            <ul class="navbar-nav">
+                <li id="home_button">
+                    <%= link_to root_path do %>
+                       <%= fa_icon "home", class: "font_awesome" %>
+                        <%= "Home" %>
+                    <% end %>
+                </li>
+            </ul>
+
+                <div class="navbar navbar-expand-lg ml-auto">
+
+                    <div id="avatar" class="navbar-nav ml-auto">
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav float-right">
+                                <% if user_signed_in? %>
+                                    <li class="nav-item dropdown"><span class="caret"></span>
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <% if current_user.avatar.blank? == false %>
+                                                <%= image_tag current_user.avatar.url, size:25, class: "user-pic-nav" %>
+                                            <% end %>
+                                            <!-- @<%= current_user.username %> -->
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
+                                            <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+                                        </div>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <ul id="right" class="navbar-nav ml-auto">
+                        <li id="tweet_button">
+                            <%= link_to "Tweet", new_tweet_path, class: "nav-link" %>
+                        </li>
+                    </ul>
+                    <!-- TWEET MODAL BUTTON -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#tweet_modal">
+                        Tweet
+                    </button>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<!-- MODAL -->
+<div class="modal fade" id="tweet_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Compose new Tweet</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      Tweets go here
+
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- HEADER PHOTO -->
+<div id="header">
+   <%= fa_icon "camera-retro" %>
+   <%= fa_icon "home" %>
+    <!-- ADD PHOTO HERE -->
+</div>
+
+<div class="profile_nav">
+    <div class="container">
+        <!-- PROFILE NAV BAR. LIST OF LIKES, ETC -->
+        <!-- Edit profile button -->
+        <div id="edit_profile_button">
+            <%= link_to "Edit profile", edit_user_registration_path, class: "edit_profile" %>
+        </div>
+    </div>
+</div>
+
+<div class="user_image">
+    <!-- USER IMAGE -->
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>
