@@ -1,0 +1,7 @@
+
+// Grabs #item_content DIV 
+// Renders partial _edit_item_modal view inside the DIV
+// Displays the actual modal #edit_item_modal
+
+$('#item_content').html("<%= j render 'new_tweet_modal', tweet: @tweet %>");
+$('#new_tweet_modal').modal('show');

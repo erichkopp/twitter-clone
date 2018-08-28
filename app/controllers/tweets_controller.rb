@@ -15,9 +15,14 @@ class TweetsController < ApplicationController
   def show
   end
 
+
+  # RESPOND_TO WILL TRIGGER AJAX JS ACTION
   # GET /tweets/new
   def new
     @tweet = Tweet.new
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /tweets/1/edit

@@ -10,6 +10,12 @@ class Tweet < ApplicationRecord
 	validates :message, length: {maximum: 250, too_long: "Too many characters."}, on: :create
 	after_validation :apply_link, on: :create
 
+
+
+# CHECKS IF THERE ARE ANY LINKS IN THE MESSAGE (HTTPS)
+# SPLITS EACH WORD INTO INDIVIDUAL VALUES IN AN ARRAY
+# MAKES LINK DISPLAY NO BIGGER THAN 23 CHARACTERS
+# JOINS BACK TOGETHER WITH SHORTER LINK
 	def link_check
 		if self.message.include? "https://"
 			arr = self.message.split
@@ -26,6 +32,11 @@ class Tweet < ApplicationRecord
 		end
 	end
 
+
+# SPLITS MESSAGE AGAIN INTO AN ARRAY OF VALUES FOR EACH WORD
+# IF THERE IS AN HTTPS LINK, IF INDX IS TRUE
+# APPLIES URL INTO AN <A> TAG TO MAKE A CLICKABLE LINK
+# JOINS BACK TOGETHER AGAIN
 	def apply_link
 			arr = self.message.split
 			indx = arr.map { |x| x.include? "https://" }.index(true)

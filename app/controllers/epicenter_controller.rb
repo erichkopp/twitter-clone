@@ -1,5 +1,32 @@
 class EpicenterController < ApplicationController
 
+  def all_users
+    @users = User.all
+  end
+
+  def following
+    @user = User.find(params[:id])
+    @users = []
+
+    User.all.each do |user|
+      if @user.following.include?(user.id)
+        @users.push(user)
+      end
+    end
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = []
+
+    User.all.each do |user|
+      if user.following.include?(@user.id)
+        @users.push(user)
+      end
+    end    
+  end
+
+
 	# ITERATE THROUGH TWEETS OF PEOPLE YOU'RE FOLLOWING OR/AND YOUR OWN TWEETS
   def feed
   	@following_tweets = []
