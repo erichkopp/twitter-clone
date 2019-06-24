@@ -1,5 +1,7 @@
 class EpicenterController < ApplicationController
 
+
+
   def all_users
     @users = User.all
   end
@@ -30,6 +32,8 @@ class EpicenterController < ApplicationController
 	# ITERATE THROUGH TWEETS OF PEOPLE YOU'RE FOLLOWING OR/AND YOUR OWN TWEETS
   def feed
   	@following_tweets = []
+    @tags = Tag.all
+   
 
     if current_user
     	Tweet.all.each do |tweet|

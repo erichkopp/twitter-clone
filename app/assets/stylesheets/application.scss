@@ -36,14 +36,21 @@ body {
 	padding: 10px;*/
 }
 
-.font_awesome {
-	font-size: 25px;
-	line-height: 15px;
+.sign-in {
+	background-color: white;
+	width: 300px;
+	padding: 35px;
+	margin-top: 5%;
+	box-shadow: 0 1px 3px 0 rgba(0,0,0,0.25);
 }
 
-#home_button {
-	/*line-height: 55px;*/
+.font_awesome_nav {
+	font-size: 25px;
+	line-height: 15px;
+	padding-left: 10px;
 }
+
+
 
 #nav {
 	background-color: #fff;
@@ -139,12 +146,13 @@ body {
 	margin-right: 6%;
 	right: 0;
 	position: absolute;
+		width: 120px;
 }
 
 .edit_profile {
 	/*position: relative;*/
 	/*right: 10;*/
-	width: 100px;
+
 	height: 40px;
 	background-color: #fff;
 	border-radius: 100px;
@@ -159,4 +167,72 @@ body {
 #edit_profile_button :hover {
 	background-color: #f5f8fa;
 	color: #66757f;
+}
+
+
+/*.tweet_column {
+	background-color: white;
+	margin-right: 5px;
+	margin-left: 5px;
+	padding-right: -5px;
+	padding-left: -5px;
+}*/
+
+.panel-body {
+	padding: 15px;
+}
+
+.panel {
+	padding: 15px;
+	border-bottom: 15px solid;
+	border-color: #E5EBF0;
+}
+
+.rightcol {
+	background-color: white;
+	padding: 0;
+}
+
+
+img.avatar {
+	border-radius: 50%;
+	width: 48px;
+	height: 48px;
+	margin: 5px;
+}
+
+
+.avatar img {
+	border-radius: 50%;
+	width: 48px;
+	height: 48px;
+	margin: 5px;
+}
+
+h4 {
+	font-size: 18px;
+}
+
+h5{
+	font-size: 14px;
+}
+
+.greytext {
+	color: #657786;
+}
+
+.media {
+	background-color: white;
+	margin: 0;
+	padding: 9px 12px 9px 12px;
+}
+
+
+.media:hover{
+	background-color: #f5f8fa;
+}
+
+.media {
+	border-bottom: 1px solid;
+	border-color: #e6ecf0;
 }

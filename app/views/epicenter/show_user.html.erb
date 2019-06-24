@@ -1,24 +1,106 @@
-<h1>@<%= @user.username %>'s Profile & Tweets</h1>
 
-<p><%= @user.name %></p>
-<p><%= @user.location %></p>
-<p><%= @user.bio %></p>
+<!-- HEADER PHOTO -->
+<div id="header">
+    <!-- ADD PHOTO HERE -->
+</div>
 
-<P>
-	<% if current_user.following.include?(@user.id) %>
-		<%= link_to "Following", unfollow_path(id: @user.id), class: "btn btn-primary", id: "unfollow-btn" %>
-	<% else %>
-		<% if current_user.id != @user.id %>
-			<%= link_to "Follow", now_following_path(id: @user.id), class: "btn btn-primary" %>
-		<% end %>
-	<% end %>
-</P>
+<div class="profile_nav">
+    <div class="container">
+        <!-- PROFILE NAV BAR. LIST OF LIKES, ETC -->
 
-<% @user.tweets.each do |tweet| %>
-	<div>
-		<p>@<%= @user.username %></p>
-		<p><%= tweet.message.html_safe %></p>
-		&bull; <%= time_ago_in_words(tweet.created_at) if Time.now - tweet.created_at < 86400 %>
-		<%= tweet.created_at.strftime('%b %e') if Time.now - tweet.created_at > 86400 %>
-	</div>
-<% end %>
+
+        <!-- Edit profile button -->
+        <div id="edit_profile_button">
+					<% if current_user.following.include?(@user.id) %>
+						<%= link_to "Following", unfollow_path(id: @user.id), class: "edit_profile", id: "unfollow-btn" %>
+					<% else %>
+						<% if current_user.id != @user.id %>
+							<%= link_to "Follow", now_following_path(id: @user.id), class: "edit_profile" %>
+						<% end %>
+					<% end %>
+        </div>
+    </div>
+</div>
+
+
+  <!-- USER IMAGE -->
+  <% if @user.avatar.blank? == false %>
+  	<%= image_tag @user.avatar.url, class: "user_image" %>
+  <% end %>
+
+
+
+
+<!-- THREE COLUMN CONTENT. -->
+	
+	<!-- BIO -->
+<div class="container">
+        <div class="row">
+            <!-- left col -->
+            <div class="col-md-3 leftcol">
+              <h4><b><%= @user.name %></b></h4>
+              <h5><span class="greytext">@<%= @user.username %></span></h5>              
+              <p><%= @user.bio %></p>                
+              <h5 class="greytext">
+              	<%= fa_icon "calendar", class: "fa" %>
+              	<i class="glyphicon glyphicon-calendar"></i>
+              	Joined <%= @user.created_at.strftime('%b %e %Y') %>
+              </h5>
+            </div>
+        
+            <!-- TWEETS -->
+	
+            <div class="col-md-6 tweet_column">
+            	<% @user.tweets.sort{ |x,y| y <=> x }.each do |tweet| %>
+                <div class="media">
+                		<!-- USER AVATAR -->
+                    <div class="media-left">                        
+										  <% if @user.avatar.blank? == false %>
+										  	<%= image_tag @user.avatar.url, class: "avatar" %>
+										  <% end %>                      
+                    </div>
+                    <!-- TWEET CONTENTS -->
+                    <div class="media-body">
+                        <h5 class="media-heading">
+														
+																<b>
+																	<%= @user.name %></b> <span class="greytext">@<%= @user.username %> &bull; 
+																	<%= time_ago_in_words(tweet.created_at) if Time.now - tweet.created_at < 86400 %>
+																	<%= tweet.created_at.strftime('%b %e') if Time.now - tweet.created_at > 86400 %></span>					
+												</h5>
+																<p><%= tweet.message.html_safe %></p>		
+                		</div>                   
+              	</div>
+							<% end %>
+            </div>
+
+
+
+
+            <!-- right col -->
+            <div class="col-md-3 rightcol">
+                <div class="panel">
+                    <div class="panel-body">
+                        <h4><b>New to Twitter?</b></h4>
+                        <p>Sign up now to get your own personalized timeline!</p>
+                        <button class="btn btn-info signup">Sign Up</button>
+                    </div>
+                </div>
+                <div class="panel">
+                    <div class="panel-body">
+                        <h4><b>Worldwide trends</b></h4>                        
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+
+				
+
+
+
+
+
+
+
+

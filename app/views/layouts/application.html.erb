@@ -12,21 +12,24 @@
   <body>
 
 
-
+<% if current_user %>
 
 <!-- REBUILD NAV BAR -->
 <div id="nav" class="sticky-top">
     <div id="nav_container" class="container">
         <div class="navbar navbar-expand-lg">
             <ul class="navbar-nav">
-                <li id="home_button">
+                <li>
                     <%= link_to root_path do %>
-                       <%= fa_icon "home", class: "font_awesome" %>
-                        <%= "Home" %>
+                      <%= fa_icon "home", class: "font_awesome_nav" %>
+                      <%= "Home" %>
                     <% end %>
                 </li>
                 <li>
-                  <%= link_to "All Users", all_users_path %>
+                  <%= link_to all_users_path do %>
+                    <%= fa_icon "users", class: "font_awesome_nav" %>
+                    <%= "All Users" %>
+                  <% end %>
                 </li>
             </ul>
 
@@ -65,72 +68,12 @@
                           <%= link_to ("Tweet"), new_tweet_path, class: "nav-link", remote: true %>
                         </li>
                     </ul>
-
-
-
             </div>
         </div>
     </div>
 </div>
 
-
-
-
-
-
-
-<!-- MODAL -->
-
-
-
-<!-- Modal -->
-
-
-
-
-
-
-
-<!-- HEADER PHOTO -->
-<div id="header">
-   <%= fa_icon "camera-retro" %>
-   <%= fa_icon "home" %>
-    <!-- ADD PHOTO HERE -->
-</div>
-
-<div class="profile_nav">
-    <div class="container">
-        <!-- PROFILE NAV BAR. LIST OF LIKES, ETC -->
-        <!-- Edit profile button -->
-        <div id="edit_profile_button">
-            <%= link_to "Edit profile", edit_user_registration_path, class: "edit_profile" %>
-        </div>
-    </div>
-</div>
-
-<div class="user_image">
-    <!-- USER IMAGE -->
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<% end %>  
 
 
 
@@ -147,10 +90,11 @@
 
 
 
-
-
-    <div class="container">
+    <!-- <div class="container"> -->
       <%= yield %>
-    </div>
+    <!-- </div> -->
+
+
+
   </body>
 </html>

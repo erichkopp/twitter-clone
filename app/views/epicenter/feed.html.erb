@@ -1,16 +1,79 @@
 <% if current_user %>
-	<h1>@<%= current_user.username %>'s Twitter Feed</h1>
-<% end %>
 
-<p>Here is what your friends are saying:</p>
-
-<div>
-	<% @following_tweets.sort{ |x,y| y <=> x }.each do |tweet| %>
-	<div>
-		<p>@<%= link_to tweet.user.username, show_user_path(id: tweet.user.id) %></p>
-		<p><%= tweet.message.html_safe %></p>
-		&bull; <%= time_ago_in_words(tweet.created_at) %> ago 
-	</div>
-	<% end %>
+<!-- HEADER PHOTO -->
+<div id="header">
+    <!-- ADD PHOTO HERE -->
 </div>
 
+<div class="profile_nav">
+    <div class="container">
+        <!-- PROFILE NAV BAR. LIST OF LIKES, ETC -->
+      <h1>@<%= current_user.username %>'s Twitter Feed</h1>
+    </div>
+</div>
+
+
+<br>
+
+
+
+	<div class="container">
+    <div class="row">
+        <!-- left col -->
+        <div class="col-md-3 leftcol">
+          <h4><b><%= current_user.name %></b></h4>
+          <h5><span class="greytext">@<%= current_user.username %></span></h5>              
+          <p><%= current_user.bio %></p>                
+          <h5 class="greytext">
+          	<%= fa_icon "calendar", class: "fa" %>
+          	<i class="glyphicon glyphicon-calendar"></i>
+          	Joined <%= current_user.created_at.strftime('%b %e %Y') %>
+          </h5>
+        </div>
+
+
+
+
+        <!-- TWEETS -->
+
+        <div class="col-md-6 tweet_column">
+					<% @following_tweets.sort{ |x,y| y <=> x }.each do |tweet| %>
+            <div class="media">
+            		<!-- USER AVATAR -->
+                <div class="media-left">                      						 
+								  <% if tweet.user.avatar.blank? == false %>
+								  	<%= link_to image_tag(tweet.user.avatar.url), show_user_path(id: tweet.user.id), class: "avatar" %>
+								  <% end %>                      
+                </div>
+                <!-- TWEET CONTENTS -->
+                <div class="media-body">
+                    <h5 class="media-heading">
+												
+														<b>
+															<%= tweet.user.name %></b> <span class="greytext">@<%= tweet.user.username %> &bull; 
+															<%= time_ago_in_words(tweet.created_at) if Time.now - tweet.created_at < 86400 %>
+															<%= tweet.created_at.strftime('%b %e') if Time.now - tweet.created_at > 86400 %></span>					
+										</h5>
+														<p><%= tweet.message.html_safe %></p>		
+            		</div>                   
+          	</div>
+					<% end %>
+        </div>
+
+        <!-- right col -->
+        <div class="col-md-3 rightcol">
+            <div class="panel">
+                <div class="panel-body">
+                    <h4><b>Trending Now</b></h4>
+       								<% @tags.each do |tag| %>
+       									<%= tag %><br>
+       								<% end %>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+	</div>
+<% end %>
